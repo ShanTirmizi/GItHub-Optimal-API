@@ -1,0 +1,15 @@
+version: 2.0
+
+phases:
+  install:
+    commands:
+      - curl -fsSL https://deb.nodesource.com/setup_18.x | -E bash -
+      - apt-get install -y nodejs
+  pre_build:
+    commands:
+      - npm install
+      - npm test
+  build:
+    commands:
+      - npm test
+      - npm build
