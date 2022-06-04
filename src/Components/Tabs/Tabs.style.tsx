@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Style the buttons as tabs active and inactive
 export const Select = styled.select`
   background: black;
   color: white;
