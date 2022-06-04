@@ -136,7 +136,6 @@ export const githubReducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case SEARCH_GITHUB_USER:
       const { repos, data, followers, following, request } = action.payload;
-      console.log(data);
       return {
         ...state,
         githubUser: data,
