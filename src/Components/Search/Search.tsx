@@ -23,9 +23,7 @@ const Search: React.FC = () => {
           />
           <Button type="submit">Search</Button>
         </Form>
-        {state.error.status && (
-          <Error>{state.error.message}. Please search a valid user</Error>
-        )}
+        {state.error.status && <Error>Please search a valid user</Error>}
         {state.request === 0 && (
           <Error>You are out of requests. Please try again in an Hour</Error>
         )}
