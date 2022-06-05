@@ -5,10 +5,17 @@ import PieChart from "../Chart/PieChart";
 import DonutChart from "../Chart/DonutChart";
 import { Container } from "./Repos.style";
 
+interface IRepo {
+  stargazers_count: number;
+  language: string;
+  forks: number;
+  stars: number;
+  name: string;
+}
 const Repos: React.FC = () => {
   const { state } = useGithubContext();
 
-  let languages = state.githubRepos.reduce((acc: any, repo: any) => {
+  let languages = state.githubRepos.reduce((acc: any, repo: IRepo) => {
     const { language } = repo;
     if (!language) return acc;
     if (acc[language]) {
@@ -19,7 +26,7 @@ const Repos: React.FC = () => {
     return acc;
   }, {});
 
-  let starsByLanguage = state.githubRepos.reduce((acc: any, repo: any) => {
+  let starsByLanguage = state.githubRepos.reduce((acc: any, repo: IRepo) => {
     const { stargazers_count, language } = repo;
     if (stargazers_count === 0 || !language) return acc;
     if (acc[language]) {
@@ -31,7 +38,7 @@ const Repos: React.FC = () => {
   }, {});
 
   let { stars, forks } = state.githubRepos.reduce(
-    (acc: any, repo: any) => {
+    (acc: any, repo: IRepo) => {
       const { stargazers_count, name, forks } = repo;
 
       acc.stars[stargazers_count] = [name, stargazers_count];
