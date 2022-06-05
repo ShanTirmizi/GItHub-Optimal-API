@@ -5,7 +5,13 @@ import mockFollowers from "./MockData/mockFollowers";
 import mockFollowing from "./MockData/mockFollowing";
 import mockRepos from "./MockData/mockRepos";
 import mockUser from "./MockData/mockUser";
-import { url } from "../utils";
+import { url } from "../utils/utils";
+import {
+  SEARCH_GITHUB_USER,
+  ERROR,
+  LOADING,
+  CHECK_REQUESTS,
+} from "../utils/actions";
 
 const initialState = {
   githubUser: mockUser,
@@ -26,9 +32,9 @@ export const GithubProvider = ({ children }) => {
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
   const searchGithubUser = async (user) => {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: LOADING });
     const responce = await axios(`${url}/users/${user}`).catch((err) =>
-      dispatch({ type: "ERROR", payload: { err } })
+      dispatch({ type: ERROR, payload: { err } })
     );
     if (responce) {
       const { login, followers_url } = responce.data;
@@ -45,7 +51,7 @@ export const GithubProvider = ({ children }) => {
         (err) => console.log(err)
       );
       dispatch({
-        type: "SEARCH_GITHUB_USER",
+        type: SEARCH_GITHUB_USER,
         payload: {
           data: responce.data,
           repos,
@@ -60,7 +66,7 @@ export const GithubProvider = ({ children }) => {
     try {
       const initialLimit = await axios(`${url}/rate_limit`);
       dispatch({
-        type: "CHECK_REQUESTS",
+        type: CHECK_REQUESTS,
         payload: { initialLimit },
       });
     } catch (error) {
