@@ -6,5 +6,5 @@ Created using React, TypeScript, CSS in JS, Basic CI/CD and Google Charts. I use
 
 ### If I had more time I would have 
 - Used Typescript everywhere in the project and would have not used the type :any in my typescript code.
-- Made it responsive
+- Made it responsive and added more styling
 - Used Redux instead of using useReducer and context
